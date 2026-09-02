@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>स्वराज्य गणेश तरुण मंडळ चा राजा - आमंत्रण</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rozha+One&family=Yatra+One&family=Tiro+Devanagari+Marathi&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { background: #1a0101; color: #fff; font-family: 'Tiro Devanagari Marathi', serif; display: flex; justify-content: center; }
+    .mobile-screen { width: 100%; max-width: 430px; min-height: 100vh; background: linear-gradient(180deg, #3d0707 0%, #150000 100%); padding-bottom: 50px; overflow-x: hidden; position: relative; }
+
+    /* १. मंदिराचा सुवर्ण दरवाजा (3D Animation) */
+    #doorScreen {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999;
+      display: flex; perspective: 1200px; cursor: pointer;
+    }
+    .door-panel {
+      width: 50%; height: 100%;
+      background: radial-gradient(circle at center, #ffd700 0%, #b8860b 60%, #523105 100%);
+      border: 5px double #3a1c02;
+      box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+      transition: transform 1.8s cubic-bezier(0.7, 0, 0.2, 1);
+    }
+    .door-left { border-right: 2px solid #200f00; transform-origin: left; }
+    .door-right { border-left: 2px solid #200f00; transform-origin: right; }
+
+    /* सुवर्ण चक्र */
+    .door-center {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 150px; height: 150px; border-radius: 50%;
+      background: radial-gradient(circle, #fff3c4, #d4af37, #855a00);
+      border: 4px solid #fff; box-shadow: 0 0 35px #ffd700;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; color: #4a1500; z-index: 10000; transition: opacity 0.5s;
+    }
+    .door-center span { font-family: 'Yatra One', cursive; font-size: 15px; font-weight: bold; }
+    .door-center small { font-size: 11px; margin-top: 4px; color: #220800; }
+
+    .open .door-left { transform: rotateY(-105deg); }
+    .open .door-right { transform: rotateY(105deg); }
+    .open .door-center { opacity: 0; pointer-events: none; }
+
+    /* २. कार्ड डिझाइन्स */
+    .content-box { padding: 16px; }
+    .card {
+      background: #fffbf2; color: #3d0e00; border-radius: 16px;
+      padding: 18px; margin-bottom: 22px; text-align: center;
+      border: 2px solid #d4af37; box-shadow: 0 8px 25px rgba(0,0,0,0.6);
+    }
+    .shree { font-family: 'Rozha One', serif; color: #8e1414; font-size: 18px; }
+    .mandal-title { font-family: 'Yatra One', cursive; font-size: 26px; color: #8e1414; margin: 8px 0; }
+    .sub-head { color: #5c2000; font-weight: bold; font-size: 14px; margin-bottom: 12px; }
+    .bappa-img { width: 100%; border-radius: 12px; border: 3px solid #d4af37; box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+
+    /* आगमन वेळ बॅनर */
+    .aagman-box {
+      background: linear-gradient(135deg, #870c0c, #b31414);
+      color: #fff; padding: 14px; border-radius: 12px;
+      border: 2px dashed #ffd700; margin: 15px 0;
+    }
+    .aagman-date { font-family: 'Yatra One', cursive; font-size: 28px; color: #ffd700; }
+    .aagman-time { font-size: 17px; font-weight: bold; margin-top: 3px; }
+
+    /* उत्सवाचा मंगल प्रवास ग्रिड */
+    .section-title { font-family: 'Yatra One', cursive; font-size: 22px; color: #8e1414; margin-bottom: 15px; }
+    .program-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .p-btn {
+      background: linear-gradient(135deg, #7a0e0e, #500505);
+      color: #ffde7a; padding: 14px 8px; border-radius: 10px;
+      font-weight: bold; font-size: 14px; border: 1px solid #d4af37;
+      cursor: pointer; transition: transform 0.1s;
+    }
+    .p-btn:active { transform: scale(0.95); }
+
+    /* फुलांची वर्षाव बटण */
+    .flower-btn {
+      background: linear-gradient(135deg, #d4af37, #aa7c11);
+      color: #3b1100; border: none; padding: 12px 24px;
+      border-radius: 25px; font-weight: bold; font-size: 16px;
+      margin-top: 10px; cursor: pointer; box-shadow: 0 4px 15px rgba(212,175,55,0.4);
+    }
+
+    .address-box { font-size: 16px; line-height: 1.6; margin: 10px 0; font-weight: bold; }
+    .map-btn {
+      display: inline-block; background: #1e7e34; color: #fff;
+      padding: 10px 22px; border-radius: 20px; text-decoration: none;
+      font-weight: bold; margin-top: 10px;
+    }
+
+    /* Modal / Pop-up Window */
+    #eventModal {
+      display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7); z-index: 10001;
+      justify-content: center; align-items: center; padding: 20px;
+    }
+    .modal-box {
+      background: #fff; color: #3d0e00; padding: 25px;
+      border-radius: 16px; width: 100%; max-width: 340px; text-align: center;
+      border: 3px solid #d4af37;
+    }
+    .modal-close {
+      background: #8e1414; color: #fff; border: none;
+      padding: 8px 18px; border-radius: 20px; margin-top: 15px; font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+  <audio id="bgSong" loop preload="auto">
+    <source src="https://commondatastorage.googleapis.com/codeskulptor-assets/Epoq-Lepidoptera.ogg" type="audio/ogg">
+    </audio>
+
+  <div id="doorScreen" onclick="enterTemple()">
+    <div class="door-panel door-left"></div>
+    <div class="door-panel door-right"></div>
+    <div class="door-center">
+      <span>गणपती बाप्पा मोरया</span>
+      <small>दर्शनासाठी स्पर्श करा ✨</small>
+    </div>
+  </div>
+
+  <div class="mobile-screen">
+    <div class="content-box">
+
+      <section class="card">
+        <p class="shree">॥ श्री गणेशाय नमः ॥</p>
+        <h1 class="mandal-title">स्वराज्य चा राजा</h1>
+        <p class="sub-head">स्वराज्य गणेश तरुण मंडळ, बार्शी</p>
+        <img src="https://images.unsplash.com/photo-1567591414240-e69123862cb2?w=600" class="bappa-img" alt="बाप्पा">
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">भव्य आगमन सोहळा</h2>
+        <div class="aagman-box">
+          <p>तारिख व वेळ</p>
+          <div class="aagman-date">१४ सप्टेंबर</div>
+          <div class="aagman-time">दुपारी ठीक ४:०० वाजता</div>
+        </div>
+        <p style="font-weight: bold; color: #8e1414;">सर्व गणेशभक्तांना आग्रहाचे निमंत्रण!</p>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">उत्सवाचा मंगल प्रवास</h2>
+        <p style="font-size: 12px; margin-bottom: 12px; color: #666;">वेळ पाहण्यासाठी नावावर स्पर्श करा</p>
+        <div class="program-grid">
+          <button class="p-btn" onclick="showModal('आगमन व प्रतिष्ठापना', '१४ सप्टेंबर - दुपारी ४:०० वाजता')">स्थापना</button>
+          <button class="p-btn" onclick="showModal('दैनिक महाआरती', 'सकाळी ८:०० व रात्री ८:३० वाजता')">आरती</button>
+          <button class="p-btn" onclick="showModal('भव्य दीपारती', 'रात्री ९:०० वाजता (विशेष आकर्षण)')">दीप आरती</button>
+          <button class="p-btn" onclick="showModal('सत्यनारायण पूजा', 'दुपारी १२:०० वाजता')">सत्यनारायण पूजा</button>
+          <button class="p-btn" onclick="showModal('महाप्रसाद', 'संध्याकाळी ७:०० ते रात्री १०:००')">महाप्रसाद</button>
+          <button class="p-btn" onclick="showModal('विसर्जन मिरवणूक', 'दुपारी ठीक २:०० वाजल्यापासून')">विसर्जन</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">बाप्पाचे आशीर्वाद</h2>
+        <p>बाप्पांच्या चरणी भक्तीपूर्वक पुष्प अर्पण करा</p>
+        <button class="flower-btn" onclick="showerFlowers()">🌸 फुलांची वर्षाव करा 🌺</button>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">पत्ता व लोकेशन</h2>
+        <div class="address-box">
+          श्री गणेश चौक, स्वराज्य कॉलनी,<br>बार्शी - ४१३४०१
+        </div>
+        <a href="https://maps.google.com/?q=Barshi,Maharashtra" target="_blank" class="map-btn">📍 Google Maps वर पहा</a>
+      </section>
+
+      <footer style="text-align: center; color: #ffd700; padding: 20px 0; font-size: 14px;">
+        <p>आपली उपस्थिती हेच बाप्पाचे खरे आशीर्वाद आहेत.</p>
+        <p style="margin-top: 5px; color: #ccc;">॥ स्वराज्य गणेश तरुण मंडळ, बार्शी ॥</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <div id="eventModal">
+    <div class="modal-box">
+      <h3 id="modalTitle" style="color: #8e1414; font-size: 20px; margin-bottom: 8px;"></h3>
+      <p id="modalDetail" style="font-size: 16px; margin: 10px 0; font-weight: bold;"></p>
+      <button class="modal-close" onclick="closeModal()">बंद करा</button>
+    </div>
+  </div>
+
+  <script>
+    function enterTemple() {
+      const door = document.getElementById('doorScreen');
+      const song = document.getElementById('bgSong');
+      
+      door.classList.add('open');
+      if (song) { song.play().catch(e => console.log(e)); }
+      
+      setTimeout(() => {
+        door.style.display = 'none';
+        showerFlowers();
+      }, 1800);
+    }
+
+    function showerFlowers() {
+      confetti({
+        particleCount: 70,
+        spread: 80,
+        origin: { y: 0.6 },
+        colors: ['#ff4d4d', '#ffa500', '#ffd700', '#ff69b4']
+      });
+    }
+
+    function showModal(title, detail) {
+      document.getElementById('modalTitle').innerText = title;
+      document.getElementById('modalDetail').innerText = detail;
+      document.getElementById('eventModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('eventModal').style.display = 'none';
+    }
+  </script>
+</body>
+</html>
