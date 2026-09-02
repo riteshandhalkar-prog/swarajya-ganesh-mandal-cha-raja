@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="mr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>स्वराज्य गणेश तरुण मंडळ चा राजा</title>
+  <link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Rozha+One&family=Tiro+Devanagari+Marathi&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Tiro Devanagari Marathi', serif; }
+    body { background: #2b0303; color: #fff; display: flex; justify-content: center; }
+    .content-container { width: 100%; max-width: 440px; background: linear-gradient(180deg, #420606 0%, #1f0202 100%); min-height: 100vh; padding: 20px 15px; overflow-x: hidden; }
+    
+    /* Door Animation */
+    .door-container { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 999; display: flex; overflow: hidden; cursor: pointer; }
+    .door { width: 50%; height: 100%; background: linear-gradient(135deg, #e5b358, #b8860b, #704214); position: relative; transition: transform 1.8s cubic-bezier(0.77, 0, 0.175, 1); box-shadow: inset 0 0 50px rgba(0,0,0,0.6); border: 4px solid #4a2603; }
+    .door-left { border-right: 2px solid #2b1400; }
+    .door-right { border-left: 2px solid #2b1400; }
+    .door-knob { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 140px; height: 140px; border-radius: 50%; background: radial-gradient(circle, #ffe082, #b8860b); border: 4px solid #fff; box-shadow: 0 0 25px rgba(255, 215, 0, 0.8); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; color: #5c1d00; font-weight: bold; z-index: 1000; transition: opacity 0.5s ease; }
+    .door-knob span { font-family: 'Yatra One', cursive; font-size: 14px; }
+    .door-knob small { font-size: 10px; margin-top: 4px; }
+    .door-container.open .door-left { transform: translateX(-100%); }
+    .door-container.open .door-right { transform: translateX(100%); }
+    .door-container.open .door-knob { opacity: 0; pointer-events: none; }
+
+    /* Cards */
+    .card { background: rgba(255, 248, 238, 0.95); color: #3b1103; border-radius: 18px; padding: 20px; margin-bottom: 24px; text-align: center; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5); border: 2px solid #d4af37; }
+    .om-symbol { font-family: 'Rozha One', serif; color: #9c1b1b; font-size: 18px; }
+    .main-title { font-family: 'Yatra One', cursive; font-size: 30px; color: #9c1b1b; margin: 10px 0; }
+    .hero-img { width: 100%; border-radius: 12px; margin-top: 15px; border: 3px solid #d4af37; }
+    .section-title { font-family: 'Yatra One', cursive; color: #9c1b1b; margin-bottom: 15px; }
+    .arrival-box { background: linear-gradient(135deg, #801313, #b81414); color: #fff; border-radius: 12px; padding: 12px; margin: 15px 0; border: 2px dashed #ffd700; }
+    .arrival-label { font-size: 14px; color: #ffe082; font-weight: bold; }
+    .arrival-date { font-family: 'Yatra One', cursive; font-size: 26px; color: #ffffff; margin: 4px 0; }
+    .arrival-time { font-size: 16px; font-weight: bold; color: #ffd700; }
+    .program-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .p-btn { background: linear-gradient(135deg, #9c1b1b, #6b0c0c); color: #ffd700; padding: 12px 6px; border-radius: 10px; font-weight: bold; font-size: 14px; }
+    .address-text { font-size: 16px; line-height: 1.6; margin: 10px 0; }
+    .map-btn { display: inline-block; margin-top: 10px; padding: 10px 20px; background: #2e7d32; color: #fff; text-decoration: none; border-radius: 25px; font-weight: bold; }
+    .gallery-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 12px; }
+    .gallery-grid img { width: 100%; height: 110px; object-fit: cover; border-radius: 8px; }
+    .blessing-text { font-weight: bold; color: #801313; font-size: 16px; }
+    .credit { font-size: 12px; margin-top: 10px; color: #555; }
+  </style>
+</head>
+<body>
+
+  <!-- १. दरवाजा स्क्रीन -->
+  <div id="doorOverlay" class="door-container" onclick="openDoor()">
+    <div class="door door-left"></div>
+    <div class="door door-right"></div>
+    <div class="door-knob">
+      <span>गणपती बाप्पा मोरया</span>
+      <small>दर्शनासाठी स्पर्श करा</small>
+    </div>
+  </div>
+
+  <!-- २. मुख्य कंटेन्ट -->
+  <main class="content-container">
+
+    <section class="card header-card">
+      <div class="om-symbol">॥ श्री गणेशाय नमः ॥</div>
+      <h1 class="main-title">स्वराज्य चा राजा</h1>
+      <p>बाप्पाच्या आगमनास आपले सस्नेह निमंत्रण!</p>
+      <img src="https://images.unsplash.com/photo-1567591414240-e69123862cb2?w=600" alt="गणपती बाप्पा" class="hero-img">
+    </section>
+
+    <section class="card profile-card">
+      <h2 class="section-title">स्वराज्य गणेश तरुण मंडळ</h2>
+      <div class="arrival-box">
+        <p class="arrival-label">🔔 भव्य आगमन सोहळा 🔔</p>
+        <p class="arrival-date">१४ सप्टेंबर</p>
+        <p class="arrival-time">वेळ: दुपारी ठीक ४:०० वाजता</p>
+      </div>
+      <p>आपली उपस्थिती प्रार्थनीय आहे!</p>
+    </section>
+
+    <section class="card program-card">
+      <h2 class="section-title">उत्सवाचा मंगल प्रवास</h2>
+      <div class="program-grid">
+        <div class="p-btn">आगमन व प्रतिष्ठापना</div>
+        <div class="p-btn">दैनिक महाआरती</div>
+        <div class="p-btn">दीपोत्सव</div>
+        <div class="p-btn">सत्यनारायण पूजा</div>
+        <div class="p-btn">महाप्रसाद</div>
+        <div class="p-btn">भव्य मिरवणूक</div>
+      </div>
+    </section>
+
+    <section class="card location-card">
+      <h2 class="section-title">पत्ता व ठिकाण</h2>
+      <div class="address-text">
+        <p><strong>श्री गणेश चौक,</strong></p>
+        <p>स्वराज्य कॉलनी, बार्शी</p>
+      </div>
+      <a href="https://maps.google.com/?q=Barshi" target="_blank" class="map-btn">📍 Google Maps वर पहा</a>
+    </section>
+
+    <section class="card gallery-card">
+      <h2 class="section-title">गेल्या वर्षाच्या आठवणी</h2>
+      <div class="gallery-grid">
+        <img src="https://images.unsplash.com/photo-1609137144813-7d9921338f24?w=300" alt="आठवण १">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=300" alt="आठवण २">
+        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?w=300" alt="आठवण ३">
+        <img src="https://images.unsplash.com/photo-1514565131-fce0801e5785?w=300" alt="आठवण ४">
+      </div>
+    </section>
+
+    <footer class="card footer-card">
+      <p class="blessing-text">आपली उपस्थिती हेच आमच्यासाठी बाप्पाचे खरे आशीर्वाद आहेत.</p>
+      <p class="credit">॥ स्वराज्य गणेश तरुण मंडळ, बार्शी ॥</p>
+    </footer>
+
+  </main>
+
+  <script>
+    function openDoor() {
+      const doorContainer = document.getElementById('doorOverlay');
+      doorContainer.classList.add('open');
+      setTimeout(() => {
+        doorContainer.style.display = 'none';
+      }, 1900);
+    }
+  </script>
+</body>
+</html>
